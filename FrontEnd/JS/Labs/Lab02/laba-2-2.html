@@ -1,0 +1,28 @@
+<meta charset="UTF-8">
+<head>
+    <script>
+        function changeStyle()
+        {
+            let link = document.getElementById("change");
+            link.style.color = "green";
+            link.style.textDecoration = "none";
+            link.style.fontSize = "24";
+            link.style.fontWeight = "bold"; 
+            return;
+        };
+
+        function backChangeStyle()
+        {
+            let link = document.getElementById("change");
+            link.style.color = "blue";
+            link.style.textDecoration = "underline";
+            link.style.fontSize = "16";
+            link.style.fontWeight = "normal"; 
+            return;
+        };
+
+    </script>
+</head>
+<body>
+    <a id = "change" href="https://www.google.com/" target="_blank" onmouseover="changeStyle()" onmouseout="backChangeStyle()">Google</a>
+</body>

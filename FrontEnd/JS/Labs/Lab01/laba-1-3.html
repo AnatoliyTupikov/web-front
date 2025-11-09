@@ -1,0 +1,49 @@
+<meta charset="UTF-8">
+<head>
+    <script>
+        
+        function showDays()
+        {
+            let days = "дней"
+            let c = document.getElementById("counter");
+            let v = Number(c.value);
+            if(v < 0 || !v) 
+            {
+                c.value = 0;
+                v = 0;
+            }
+
+            if (!(v >= 11 && v<=14))
+            {
+                let ost = v % 10;
+                if (ost == 1) days = "день"
+                if (ost >= 2 && ost <= 4) days = "дня"
+            } 
+
+            let d = document.createElement("div");
+            let l = document.createElement("label");
+            l.textContent = `До конца вашей учебы остается ${v} ${days}.`
+            d.appendChild(l);
+            document.body.appendChild(d);
+            return;
+
+
+
+        };
+        
+
+    </script>
+    
+
+</head>
+<body>
+    <div>
+        <label>Дни: </label>
+        <input type="number" min="0" max="1000" value="1" id="counter">
+    </div>
+     <div>
+        <button onclick="showDays()">Сколько?</button>
+    </div>
+    
+    
+</body>

@@ -1,0 +1,26 @@
+<meta charset="UTF-8">
+<head>
+    <script>
+        let isDoubled = false;
+        function doubleSize()
+        {
+            let png = document.getElementById("cat");
+            if (isDoubled)
+            {
+                png.width /= 2;
+                png.height /= 2; 
+            }
+            else
+            {
+                png.width *= 2;
+                png.height *= 2; 
+            }
+            isDoubled = !isDoubled;
+            return;
+        }
+        
+    </script>
+</head>
+<body>
+    <img id ="cat" src="cat.jpg" height="410" width="360" ondblclick="doubleSize()">
+</body>
