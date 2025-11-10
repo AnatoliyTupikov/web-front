@@ -1,7 +1,10 @@
 <meta charset="UTF-8">
 <head>
     <script>
-        function changeStyle()
+        
+        (function()
+        {
+            let changeStyle = function ()
         {
             let link = document.getElementById("change");
             link.style.color = "green";
@@ -11,7 +14,7 @@
             return;
         };
 
-        function backChangeStyle()
+            let backChangeStyle = function ()
         {
             let link = document.getElementById("change");
             link.style.color = "blue";
@@ -19,10 +22,19 @@
             link.style.fontSize = "16";
             link.style.fontWeight = "normal"; 
             return;
+        }
+        function initializiation ()
+        {
+            let ref = document.getElementById("change");
+            ref.addEventListener('mouseenter', changeStyle);
+            ref.addEventListener('mouseout', backChangeStyle);
         };
+        window.addEventListener('load', initializiation);
+        })();
+        
 
     </script>
 </head>
 <body>
-    <a id = "change" href="https://www.google.com/" target="_blank" onmouseover="changeStyle()" onmouseout="backChangeStyle()">Google</a>
+    <a id = "change" href="https://www.google.com/" target="_blank" >Google</a>
 </body>
