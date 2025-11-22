@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <script src="modernizr-custom.js"></script>
+    <script>
+        
+        (function(){
+            function draw(){
+             if (!Modernizr.canvas) return; 
+             let canvas = document.getElementById("myCanvas");
+             if (!canvas || !canvas.getContext) return;
+             let context = canvas.getContext("2d");
+             let grad = context.createLinearGradient(0,0,canvas.width,canvas.height);
+             grad.addColorStop(0.15, "#D2006B");
+             grad.addColorStop(0.4, "blue");
+             grad.addColorStop(0.6, "green");
+             grad.addColorStop(0.85, "yellow");
+             context.fillStyle = grad;             
+             context.rect(0,0,canvas.width, canvas.height);
+
+             context.fill();
+             context.stroke();
+             return;
+            }
+            window.addEventListener('load', draw);
+        })();
+    </script>
+</head>
+<body>
+    <canvas id="myCanvas" width="500" height="500" style="border:1px solid #000000;">
+        Your browser does not support the HTML5 canvas tag.
+    </canvas>
+</body>

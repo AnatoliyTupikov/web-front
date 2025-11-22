@@ -1,0 +1,54 @@
+<meta charset="UTF-8">
+<head>
+    <script>
+        function makeError(message)
+        {
+            this.style.border = "2px solid red";
+            this.style.backgroundColor = "pink";
+            this.title = message;
+            return;
+        };
+        function backToNormal()
+        {
+            this.style.backgroundColor = "";
+            this.style.border = "";
+            this.title = "";
+            return;
+        }
+        let checkForm = function (e)
+        {
+            e.preventDefault();
+            let fields = document.getElementsByTagName("input");
+            for( let i = 0; i < fields.length; i++){
+                let element = fields[i];
+                if (!element.value)
+                {
+                    makeError.call(element, "Поле не может быть пустым") //передали в объект функции элемент, кот. this
+                    continue;                
+                    
+                }
+                else if(element.name == "pssw" && (element.value.length < 6 || element.value.length > 12)) makeError.call(element, "Пароль должен содержать от 6 до 12 символов!");
+                else if(element.name == "cpssw" && (document.getElementById('pssw').value != element.value)) makeError.call(element, '"Подтверждение пароля" не совпадает с паролем!');
+                else if(element.name == "email" && !(/^[\w.-]+@[\w.-]+\.\w{2,}$/i.test(element.value))) makeError.call(element, 'Неправельный емайл. Емайл должен быть формата: "user@mail.com"');
+                else backToNormal.call(element);
+            };
+
+            return;
+        }
+    </script>
+</head>
+<body>
+    <form onsubmit="checkForm(event)"> 
+        <label for="lg" >Логин:</label><br>
+        <input type="text" id="lg" name="lg"><br>
+        <label for="pssw">Пароль:</label><br>
+        <input type="text" id="pssw" name="pssw"><br>
+        <label for="cpssw">Подтверждение пароля:</label><br>
+        <input type="text" id="cpssw" name="cpssw"><br>
+        <label for="email">Емайл:</label><br>
+        <input type="text" id="email" name="email">
+        <br>
+        <br>
+        <button type="submit">Отправить</button>
+    </form>
+</body>

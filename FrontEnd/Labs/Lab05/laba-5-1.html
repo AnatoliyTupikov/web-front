@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .new-input-wrapper{
+            margin-bottom: 10px;
+        }
+        .new-input-label{
+            margin-right: 10px;
+        }
+        .new-input-field{
+            margin-right: 10px;
+        }
+        .new-input-field[type="number"]{
+            width: 50px;
+        }
+        .new-input-status{
+            width: 16px;
+            height: 16px;
+            vertical-align: middle;
+        }
+    </style>
+    <script>
+        (function(){
+            let NewInput = function (labelText = "", isRequired = false, inputType = "text") 
+            {
+                //let this = {};
+                //this.__proto__ = NewInput.prototype;
+                this.isRequired = isRequired;
+
+                this.el_main = document.createElement("div");
+                this.el_main.className = "new-input-wrapper";
+
+                this.el_label = document.createElement("label");
+                this.el_label.textContent = labelText;
+                this.el_label.className = "new-input-label";
+
+                this.el_status = document.createElement("img");
+                this.el_status.className = "new-input-status";
+
+                this.el_input = document.createElement("input");
+                this.el_input.type = inputType;
+                this.el_input.className = "new-input-field";
+
+                this.el_main.appendChild(this.el_label); 
+                this.el_main.appendChild(this.el_input);
+                this.el_main.appendChild(this.el_status);                         
+                this.el_main.addEventListener("input", function(){
+                    this.validate();
+                }.bind(this));
+                this.validate();
+                //return this
+            }
+            NewInput.prototype.validate = function()
+            {
+                if(this.isRequired && !this.el_input.value)
+                {
+                    this.el_status.src = "no.jpeg";
+                }
+                else
+                {
+                    this.el_status.src = "yes.jpeg";
+                }
+            }
+            function initialization()
+            {
+                let customInputs = document.getElementsByClassName("new-input");
+                let staticAray = Array.from(customInputs);
+                staticAray.forEach(element => {
+                    
+                    let isRequired = element.dataset.isrequired === "true";
+                    let inputType = element.dataset.inputtype || "text";
+                    let labelText = element.textContent;
+                    let newInput = new NewInput(labelText, isRequired, inputType);
+                    element.replaceWith(newInput.el_main);
+                });
+                
+                
+            }
+            window.addEventListener('load', initialization); 
+            
+
+        })();
+        
+
+    </script>
+</head>
+<body>    
+    <label>Пожалуйста, заполните обязательные поля.</label>
+
+    <div class="new-input" data-isRequired="true">Имя:</div>
+
+
+    <div class="new-input" data-inputType="number">Возраст:</div>
+
+   
+    <div class="new-input" data-isRequired="true">E-mail:</div>
+    
+ 
+    <div class="new-input">Сайт:</div>
+
+    
+
+    
+</body>

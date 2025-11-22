@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8">
+<script>
+    
+    (function()
+    {
+        function makeError(message)
+        {
+            this.style.border = "2px solid red";
+            this.style.backgroundColor = "pink";
+            this.title = message;
+            return;
+        };
+        function backToNormal()
+        {
+            this.style.backgroundColor = "";
+            this.style.border = "";
+            this.title = "";
+            return;
+        }
+        let checkForm = function ()
+        {
+            
+            let fields = document.getElementsByTagName("input");
+            let isValid = true;
+            for( let i = 0; i < fields.length; i++){
+                let element = fields[i];
+                if (!element.value)
+                {
+                    makeError.call(element, "Can not be empty!") //передали в объект функции элемент, кот. this
+                    isValid = false;
+                    continue;                
+                    
+                }               
+                else backToNormal.call(element);
+            };
+            return isValid;
+        }
+        function savePhone(webStorage, number, name)
+        {
+            if (!webStorage) 
+            {
+                let wr = document.createElement("p");
+                wr.textContent = "Can not save the record. Your browser does not support Web Storage or there is no access.";
+                wr.id = "gen_el";                
+                document.getElementById("output_area").appendChild(wr);
+                return;
+            };
+            webStorage.setItem(name, number);
+            return;
+        }
+
+        
+
+        function updateOutput(webStorage)
+        {
+            document.getElementById("gen_el")?.remove();
+            if (!webStorage) 
+            {
+                let wr = document.createElement("p");
+                wr.textContent = "Can not access to the storage or your browser does not support it.";
+                wr.id = "gen_el";                
+                document.getElementById("output_area").appendChild(wr);
+                return;
+            };
+            if (webStorage.length === 0)
+            {
+                let wr = document.createElement("p");
+                wr.textContent = "Phone book is empty.";
+                wr.id = "gen_el";                
+                document.getElementById("output_area").appendChild(wr);
+                return;
+            }else{
+                let table = document.createElement("table");
+                table.id = "gen_el";
+                table.createTHead();
+                let header = table.tHead.insertRow();
+                header.insertCell().textContent = "#";
+                header.insertCell().textContent = "Name";
+                header.insertCell().textContent = "Phone number";
+                
+                
+
+                
+                for (let i = 0; i < webStorage.length; i++)
+                {
+                    let row = table.insertRow();
+                    row.insertCell().textContent = i + 1;
+                    row.insertCell().textContent = webStorage.key(i);
+                    row.insertCell().textContent = webStorage.getItem(webStorage.key(i));
+                    let remBtn = document.createElement("button");
+                    remBtn.textContent = "Delete";
+                    remBtn.addEventListener("click", function(){
+                        webStorage.removeItem( webStorage.key(i) );
+                        updateOutput(webStorage);
+                    }); 
+                    row.insertCell().appendChild(remBtn);                   
+                }
+                document.getElementById("output_area").appendChild(table);
+            }
+
+
+        }
+
+        const webStorage = window.localStorage; //меняем на sessionStorage при необходимости
+
+        function initializiation ()
+        {
+            
+            let element = document.getElementById("main_form");
+            
+            element.addEventListener("submit", function(e){
+                e.preventDefault();
+                if (checkForm()) 
+                {
+                    let formData = new FormData(element);
+                    savePhone(webStorage, formData.get("phn"), formData.get("name"));
+                    element.reset();
+                    
+                }
+                updateOutput(webStorage);
+            });
+            element.addEventListener('load', function(){
+            updateOutput(webStorage);});
+        }
+        window.addEventListener('load', initializiation);
+        window.addEventListener('load', function(){
+            updateOutput(webStorage);
+        });
+    })();
+    
+</script>
+<style>
+    button{
+        margin-left: 10px;
+    }
+</style>
+
+</head>
+<body>
+    <h2>Phone book</h2>
+    <form id="main_form" > 
+        <label for="name" >Name:</label>
+        <input type="text" id="name" name="name">
+        <label for="phn" style="margin-left: 5px;">Phone:</label>
+        <input type="text" id="phn" name="phn">
+        <button id="submit" type="submit">Save</button>
+        <hr>
+    </form>
+    <article id="output_area">
+
+    </article>
+    
+</body>

@@ -1,0 +1,25 @@
+<meta charset="UTF-8">
+<head>
+<script>
+   
+    var NewClass = function (title, url) 
+    {
+        //var this = {};
+        //this.__proto__ = NewInput.prototype; присваивание прототипа функции новому объекту
+        this.title = title;
+        this.url = url;        
+        //return this
+    }
+
+    NewClass.prototype.show = function()
+    {
+        document.write("Title: " + this.title + "<br>"); //после загрузки документа, эта функция сотрет, все что было написано не через эту функцию
+        document.write("url: " + this.url);
+    }
+    
+</script>
+<body>    
+    <div>
+        <button onclick="new NewClass('Google', 'https\://www.google.com/').show()">Show class</button>
+    </div>
+</body>
