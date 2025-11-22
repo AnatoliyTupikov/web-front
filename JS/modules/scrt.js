@@ -6,5 +6,6 @@
         }
         addEventListener("load", (event) => {
             let btn = document.getElementById("btn");
-            if(btn) btn.addEventListener('click', (event) => generateCode("Alex"))
+            let parent_el = document.getElementById("p-element");
+            if(btn) btn.addEventListener('click', (event) => generateCode(parent_el));
         })

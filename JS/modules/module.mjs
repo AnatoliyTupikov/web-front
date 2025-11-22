@@ -1,17 +1,14 @@
 
-export function generateCode(str)
+export function generateCode(el)
 {
-    let main_el = document.getElementById("gen-code");
-
-    if(!main_el) {
-         console.log('"generateCode" function can not find element with "gen-code" id'); 
+    if(!el) {
+         console.log('"generateCode" function didn not get the parent element'); 
         return;
     }
 
     let new_el = document.createElement('div');
-    new_el.innerHTML =  `<h3>Hello, ${str}!</h3>`;
-    main_el.appendChild(new_el);
-
-       
+    new_el['className'] = 'generated-code-block';
+    new_el.innerHTML =  `<h3>Hello, world!</h3>`;
+    el.appendChild(new_el);       
 }
     
