@@ -1,4 +1,4 @@
- import {generateCode} from "./module.js";      
+ import {generateCode} from "./module.mjs";      
    
         for (let prop in window)
         {
