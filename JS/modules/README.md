@@ -8,7 +8,7 @@
 
 ### Main statements:
 
-- Usual, the files with models code save with ".mjs" exctention (like module.mjs), just for more clarity. But not all browser can work with it, it needs carefully.
+- Usual, the files with models code save with ".mjs" exctention (like **module.mjs**), just for more clarity. But not all browser can work with it, it needs carefully.
 
 ### Main constrains:
 
@@ -23,4 +23,16 @@ modules
  ┣ README.md
  ┗ scrt.js
 ```
-**main.html** — import **scrt.js** which contains the ```import``` command from **module.mjs**
+**main.html** — file contains main html code and imports **scrt.js**, which contains the ```import``` command from **module.mjs**
+
+## Documentation
+```
+export generateCode(parent_element)
+```
+
+Takes ```parent_element``` (for example, an element from the DOM). Inserts a ```div``` wrapper with ```class="generated-code-block``` and an ```<h*>``` element inside the ```parent_element``` via innerHTML.
+
+### CSS
+Selector ```.generated-code-block```
+
+
