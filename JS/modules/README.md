@@ -9,11 +9,15 @@
 ### Main statements:
 
 - Usual, the files with models code save with ".mjs" exctention (like **module.mjs**), just for more clarity. But not all browser can work with it, it needs carefully.
+- You can export functions, ```var```, ```let```, ```const``` and classes. They need to be top-level items: for example, you can't use export inside a function
+- The imported values are read-only views of the features that were exported. Similar to ```const``` variables (it isn't ```window``` property/ not the global scope), you cannot re-assign the variable that was imported, but you can still modify properties of object values. The value can only be re-assigned by the module exporting it
+- Imports map [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules#importing_modules_using_import_maps)
+
 
 ### Main constrains:
 
-- "Import" commands will be run only in the script tag with "module" type. Even if the script being imported contains the ```import``` command. [Example](https://github.com/AnatoliyTupikov/web-front/blob/61c14286e7b826e8963e41cead6622cfb0f36cdf/JS/modules/main.html#L4)
-- The described above script tag will be parsed by a browser only througth a Web-server run. [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) for example.
+- "Import" commands will be run only in the script tag with "module" type. Even if the script being imported contains the ```import``` command. [Example](https://github.com/AnatoliyTupikov/web-front/blob/61c14286e7b826e8963e41cead6622cfb0f36cdf/JS/modules/main.html#L4). [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules#applying_the_module_to_your_html)
+- The described above script tag will be parsed by a browser only througth a Web-server run. [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) for example. [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules#other_differences_between_modules_and_classic_scripts)
 
 ## Project structure
 ```
